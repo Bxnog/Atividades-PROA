@@ -13,9 +13,10 @@ fun inicio() {
     val escolha = readln().toIntOrNull()
     when (escolha) {
         1 -> cadastrarQuartos()
-        2 -> cadastrarHospedes()
-        3 -> AbastecimentoDeAutomoveis()
-        4 -> sairDoHotel()
+        2 -> CadastroHospedes()
+        3 -> CadastroHospedesDataClass()
+        4 -> AbastecimentoDeAutomoveis()
+        5 -> sairDoHotel()
         else -> erro()
     }
 }
