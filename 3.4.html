@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //         Crie um programa que funcione como uma agenda de contatos.
+
+        // O usuário pode cadastrar contatos informando nome e telefone (armazene como objetos em um array).
+        // O programa deve permitir que o usuário busque um contato pelo nome.
+
+        // Se o contato existir, exiba o telefone; se não existir, exiba "Contato não encontrado".
+
+        // O usuário também pode remover um contato pelo nome.
+
+        // Quando o usuário digitar "LISTAR", exiba todos os contatos cadastrados (nome e telefone).
+
+        // Quando o usuário digitar "SAIR", encerre o programa exibindo a mensagem "Agenda encerrada. Total de contatos: X".
+
+        // ```
+        // Digite um comando (ADICIONAR, BUSCAR, REMOVER, LISTAR, SAIR): ADICIONAR
+        // Nome: Ana
+        // Telefone: 99999-8888
+        // Contato adicionado!
+
+        // Digite um comando: BUSCAR
+        // Nome: Ana
+        // Telefone: 99999-8888
+
+        // Digite um comando: REMOVER
+        // Nome: Ana
+        // Contato removido!
+
+        // Digite um comando: LISTAR
+        // Nenhum contato cadastrado.
+
+        // Digite um comando: SAIR
+        // Agenda encerrada. Total de contatos: 0
+        // ```
+        var comandoSelecionado;
+        var listaDContato = [{ Nome: "Breno", fone: "9999" }]
+
+        function pegarComando() {
+            comandoSelecionado = prompt("Digite um comando (ADICIONAR, BUSCAR, REMOVER, LISTAR, SAIR):")
+            comandoSelecionado = comandoSelecionado.toUpperCase()
+        }
+
+        function adicionar() {
+            var nomeDigitado = prompt("Nome:")
+            var numeroDigitado = prompt("Numero:")
+            listaDContato.push({ Nome: nomeDigitado, fone: numeroDigitado })
+        }
+
+        function buscarPorNome(nomedigitado) {
+            var temNaLista = false
+            listaDContato.forEach(element => {
+                if (nomedigitado == element.Nome) {
+                    temNaLista = true
+                    alert(element.fone)
+                }
+            });
+            if (!temNaLista) {
+                alert("Usuario não encontrado")
+            }
+        }
+        function remover(nomedigitado) {
+            var temNaLista = false
+            listaDContato.forEach((element, index) => {
+                if (nomedigitado == element.Nome) {
+                    temNaLista = true
+                    listaDContato.splice(index, 1)
+                }
+            });
+            if (!temNaLista) {
+                alert("Usuario não encontrado")
+            }
+        }
+
+        function listar() {
+            alert(listaDContato.forEach() => {}`Nome: ${} fone: ${}`);
+        }
+        pegarComando()
+        switch (comandoSelecionado) {
+            case "ADICIONAR":
+                adicionar();
+                break;
+            case "BUSCAR":
+                buscarPorNome(prompt("Digite o nome:"));
+                break;
+            case "REMOVER":
+                removerPorNome(prompt("Digite o nome:"));
+                break;
+            case "LISTAR":
+                listar()
+                break;
+
+            default:
+                alert("Comando desconhecido")
+        }
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
