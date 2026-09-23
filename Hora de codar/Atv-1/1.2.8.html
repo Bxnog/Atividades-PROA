@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var numeros = []
+        var soma = 0
+
+        for(i = 0; i < 4; i++){
+            var numero = parseFloat(prompt(`Digite um numero maior que 0 e menor que 10.`))
+
+            while(numero <= 0 || numero >= 10){
+                numero = parseFloat(prompt("Valor invalido. Digite um numero maior que 0 e menor que 10."))
+            }
+
+            numeros.push(numero)
+            soma += numero
+        }
+
+        var media = soma / numeros.length
+
+        if(media > 5){
+            alert(`Media: ${media}\nVocê passou no teste`)
+        } else {
+            alert(`Media: ${media}\nTente novamente`)
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

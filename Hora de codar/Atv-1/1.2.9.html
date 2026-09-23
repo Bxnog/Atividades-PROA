@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var nascimento = parseInt(prompt("Digite o ano de nascimento."))
+        var anoAtual = new Date().getFullYear()
+        var idade = anoAtual - nascimento
+
+        if(idade >= 16){
+            alert(`Idade: ${idade}\nPode votar`)
+        } else {
+            alert(`Idade: ${idade}\nNão pode votar`)
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

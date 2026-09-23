@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var aprovados = 0
+        var resposta = "S"
+
+        while(resposta.toUpperCase() == "S"){
+            var nota1 = parseFloat(prompt("Digite a primeira nota."))
+            var nota2 = parseFloat(prompt("Digite a segunda nota."))
+
+            var media = (nota1 + nota2) / 2
+
+            if(media >= 9.5){
+                aprovados++
+                alert(`Media: ${media}\nAluno aprovado`)
+            } else {
+                alert(`Media: ${media}\nAluno reprovado`)
+            }
+
+            resposta = prompt("Calcular a média de outro aluno? (S/N)")
+        }
+
+        alert(`Quantidade de alunos aprovados: ${aprovados}`)
+    </script>
+</head>
+<body>
+</body>
+</html>

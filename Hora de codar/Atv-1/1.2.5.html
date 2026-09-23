@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var numeros = []
+        var soma = 0
+
+        for(i = 0; i < 6; i++){
+            var numero = parseFloat(prompt(`Digite o ${i + 1}° numero.`))
+            numeros.push(numero)
+            soma += numero
+        }
+
+        alert(`Valores informados: ${numeros}`)
+        alert(`Media: ${soma / numeros.length}`)
+    </script>
+</head>
+<body>
+</body>
+</html>

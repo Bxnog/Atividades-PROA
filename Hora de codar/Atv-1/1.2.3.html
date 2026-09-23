@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var numero = -Infinity
+
+        for(i = 0; i < 3; i++){
+            var numerot = parseFloat(prompt(`Digite o ${i + 1}° numero.`))
+
+            if(numerot > numero){
+                numero = numerot
+            }
+        }
+
+        alert(`Maior numero digitado: ${numero}`)
+    </script>
+</head>
+<body>
+</body>
+</html>

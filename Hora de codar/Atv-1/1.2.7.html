@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var numeros = []
+        var soma = 0
+
+        for(i = 0; i < 6; i++){
+            var numero = parseFloat(prompt(`Digite o ${i + 1}° numero.`))
+            numeros.push(numero)
+
+            if(numero < 72){
+                soma += numero
+            }
+        }
+
+        alert(`Valores informados: ${numeros}\nSoma dos valores menores que 72: ${soma}`)
+    </script>
+</head>
+<body>
+</body>
+</html>

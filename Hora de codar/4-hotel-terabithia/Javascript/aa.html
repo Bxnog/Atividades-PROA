@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Contatos</title>
+    <style>
+        .escondido { display: none; }
+        #erro { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Agenda de Contatos</h1>
+
+    <div class="botoes">
+        <button onclick="prepararFormulario('adicionar')">Adicionar</button>
+        <button onclick="prepararFormulario('buscar')">Buscar</button>
+        <button onclick="prepararFormulario('remover')">Remover</button>
+        <button onclick="renderizarLista(agenda.obterTodos())">Listar Todos</button>
+    </div>
+
+    <form id="formContacto" class="escondido">
+        <div>
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" required />
+        </div>
+        <div id="campoFone">
+            <label for="fone">Fone:</label>
+            <input id="fone" type="text" />
+        </div>
+        <button type="submit" id="btnSubmit">Confirmar</button>
+    </form>
+
+    <div id="contatos"></div>
+    <div id="erro"></div>
+
+    <script>
+        // --- 1. CAMADA DE DADOS E LÓGICA (Regra de Negócio Pura) ---
+        const agenda = {
+            contatos: [
+                { Nome: "Breno", fone: "9999" }, 
+                { Nome: "Joao", fone: "12345" }
+            ],
+
+            obterTodos() {
+                return this.contatos;
+            },
+
+            existe(nome) {
+                return this.contatos.some(c => c.Nome.toLowerCase() === nome.trim().toLowerCase());
+            },
+
+            adicionar(nome, fone) {
+                if (this.existe(nome)) return { sucesso: false, msg: "Contato já existe!" };
+                this.contatos.push({ Nome: nome.trim(), fone: fone.trim() });
+                return { sucesso: true };
+            },
+
+            buscar(nome) {
+                return this.contatos.filter(c => c.Nome.toLowerCase().includes(nome.trim().toLowerCase()));
+            },
+
+            remover(nome) {
+                const totalAntes = this.contatos.length;
+                this.contatos = this.contatos.filter(c => c.Nome.toLowerCase() !== nome.trim().toLowerCase());
+                return this.contatos.length < totalAntes;
+            }
+        };
+
+        // --- 2. CAMADA DE INTERFACE (DOM e Eventos) ---
+        let acaoAtual = null;
+
+        const form = document.querySelector("#formContacto");
+        const campoFone = document.querySelector("#campoFone");
+        const inputNome = document.querySelector("#nome");
+        const inputFone = document.querySelector("#fone");
+        const btnSubmit = document.querySelector("#btnSubmit");
+        const divContatos = document.querySelector("#contatos");
+        const divErro = document.querySelector("#erro");
+
+        function limparMensagens() {
+            divContatos.innerHTML = "";
+            divErro.textContent = "";
+        }
+
+        function prepararFormulario(acao) {
+            limparMensagens();
+            acaoAtual = acao;
+            form.classList.remove('escondido');
+            inputNome.value = "";
+            inputFone.value = "";
+
+            if (acao === 'adicionar') {
+                campoFone.classList.remove('escondido');
+                inputFone.required = true;
+                btnSubmit.textContent = "Adicionar Contato";
+            } else {
+                campoFone.classList.add('escondido');
+                inputFone.required = false;
+                btnSubmit.textContent = acao === 'buscar' ? "Buscar Contato" : "Remover Contato";
+            }
+        }
+
+        function renderizarLista(lista) {
+            limparMensagens();
+            if (lista.length === 0) {
+                divErro.textContent = "Nenhum contato encontrado.";
+                return;
+            }
+            divContatos.innerHTML = lista
+                .map(c => `<p><strong>Nome:</strong> ${c.Nome} | <strong>Fone:</strong> ${c.fone}</p>`)
+                .join("");
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nome = inputNome.value;
+            const fone = inputFone.value;
+
+            if (acaoAtual === 'adicionar') {
+                const res = agenda.adicionar(nome, fone);
+                if (res.sucesso) {
+                    renderizarLista(agenda.obterTodos());
+                    form.classList.add('escondido');
+                } else {
+                    divErro.textContent = res.msg;
+                }
+            } else if (acaoAtual === 'buscar') {
+                const resultados = agenda.buscar(nome);
+                renderizarLista(resultados);
+            } else if (acaoAtual === 'remover') {
+                const removeu = agenda.remover(nome);
+                if (removeu) {
+                    renderizarLista(agenda.obterTodos());
+                } else {
+                    divErro.textContent = "Contato não localizado para remoção.";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

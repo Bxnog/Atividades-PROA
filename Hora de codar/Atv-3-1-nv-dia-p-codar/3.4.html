@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Contatos - Street Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <style>
+        @keyframes mexerParaSempre {
+            0% { transform: rotate(-2deg) translateY(0px); }
+            50% { transform: rotate(2deg) translateY(-6px); }
+            100% { transform: rotate(-2deg) translateY(0px); }
+        }
+
+        .grafite-animado-infinito {
+            display: inline-block;
+            animation: mexerParaSempre 2.5s ease-in-out infinite;
+        }
+
+        .fundo-muro { background-color: #2b2b2b; }
+        .fonte-grafite { font-family: 'Permanent Marker', cursive; }
+        .fonte-tag { font-family: 'Caveat', cursive; }
+
+        .borda-grafite {
+            border: 3px solid #000;
+            box-shadow: 10px 7px 0px #000;
+        }
+
+        .borda-grafite-rosa {
+            border: 3px solid #000;
+            box-shadow: 10px 7px 0px #FF007A;
+        }
+
+        .sombra-neon-amarela { filter: drop-shadow(0px 0px 8px #FFE600); }
+        .sombra-neon-rosa { filter: drop-shadow(0px 0px 10px #FF007A); }
+        .sombra-neon-verde { filter: drop-shadow(0px 0px 8px #00FF66); }
+
+        .escondidinho { display: none !important; }
+        .mostradinho { display: flex !important; }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center fundo-muro p-4 text-white">
+    <div class="agenda flex flex-col gap-6 items-center w-full max-w-lg">
+
+        <!-- ========================================== -->
+        <!-- COMPONENTE: PAINEL PRINCIPAL DE OPERAÇÕES  -->
+        <!-- ========================================== -->
+        <div class="operacoes bg-neutral-900/90 w-full p-6 rounded-2xl borda-grafite flex flex-col gap-5 items-center relative overflow-hidden">
+
+            <!-- Título Principal -->
+            <div class="text-center transform -rotate-2">
+                <h1 class="fonte-grafite grafite-animado-infinito text-3xl sm:text-4xl text-yellow-300 tracking-wider sombra-neon-amarela">
+                    AGENDA
+                </h1>
+            </div>
+
+            <!-- Formulário -->
+            <form class="formulario escondidinho w-full bg-black/70 p-4 rounded-xl borda-grafite-rosa flex-col gap-4 transition-all">
+                <div class="nomeinput flex flex-col gap-1">
+                    <label for="nome" class="fonte-grafite text-pink-500 tracking-wide">TAG / NOME:</label>
+                    <input id="nome" type="text" placeholder="Ex: Breno Spray" class="fonte-tag text-2xl w-full bg-neutral-800 text-yellow-300 px-3 py-1.5 rounded-lg border-2 border-pink-500 focus:outline-none focus:bg-neutral-900 placeholder:text-neutral-600" />
+                </div>
+
+                <div class="foneinput flex flex-col gap-1">
+                    <label for="fone" class="fonte-grafite text-pink-500 tracking-wide">FONE / CONTATO:</label>
+                    <input id="fone" type="text" placeholder="Ex: 9999-8888" class="fonte-tag text-2xl w-full bg-neutral-800 text-yellow-300 px-3 py-1.5 rounded-lg border-2 border-pink-500 focus:outline-none focus:bg-neutral-900 placeholder:text-neutral-600" />
+                </div>
+
+                <button id="enviar" class="fonte-grafite text-xl bg-pink-600 hover:bg-pink-500 text-white py-2 rounded-lg borda-grafite active:translate-y-1 transition transform">
+                    ENVIAR
+                </button>
+            </form>
+
+            <!-- Botões de Ação -->
+            <div class="botoes grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+                <button class="fonte-grafite text-lg bg-purple-600 hover:bg-purple-500 text-white h-12 rounded-xl borda-grafite active:translate-y-1 transition transform" id="adicionar">
+                    + CRIAR
+                </button>
+                <button class="fonte-grafite text-lg bg-cyan-600 hover:bg-cyan-500 text-white h-12 rounded-xl borda-grafite active:translate-y-1 transition transform" id="buscar">
+                    BUSCAR
+                </button>
+                <button class="fonte-grafite text-lg bg-red-600 hover:bg-red-500 text-white h-12 rounded-xl borda-grafite active:translate-y-1 transition transform" id="remover">
+                    APAGAR
+                </button>
+                <button class="fonte-grafite text-lg bg-emerald-500 hover:bg-emerald-400 text-black h-12 rounded-xl borda-grafite active:translate-y-1 transition transform" id="listar">
+                    LISTAR
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- COMPONENTE: PAINEL DE EXIBIÇÃO / RESULTADO -->
+        <!-- ========================================== -->
+        <div class="resultado bg-neutral-900/90 w-full max-h-[404px] p-6 rounded-2xl borda-grafite flex flex-col gap-4">
+            <h2 class="fonte-grafite text-2xl text-emerald-400 tracking-wider border-b-2 border-neutral-700 pb-2 flex justify-between items-center">
+                <span>CONTATOS</span>
+                <span class="text-xs text-neutral-400 font-sans">[REGISTROS]</span>
+            </h2>
+
+            <div id="contatos" class="rounded-xl flex flex-col gap-3 overflow-auto pr-3"></div>
+            <div id="erro" class="fonte-grafite text-red-500 text-center text-lg"></div>
+        </div>
+
+    </div>
+
+    <script>
+        var listaDContato = [{ Nome: "Breno", fone: "9999" }, { Nome: "Joao", fone: "12345" }, { Nome: "Joao", fone: "12345" }, { Nome: "Joao", fone: "12345" }, { Nome: "Joao", fone: "12345" }];
+        let opcao;
+
+        function limparMensagens() {
+            document.querySelector("#erro").textContent = "";
+        }
+
+        function adicionar() {
+            limparMensagens();
+            const form = document.querySelector(".formulario");
+            const botao = document.querySelector("#enviar");
+            document.querySelector(".foneinput").classList.remove('escondidinho');
+            form.classList.remove('escondidinho');
+            form.classList.add('mostradinho');
+            botao.textContent = "GRAvAR CONTATO";
+            opcao = 1;
+        }
+
+        function buscar() {
+            limparMensagens();
+            const form = document.querySelector(".formulario");
+            const botao = document.querySelector("#enviar");
+            document.querySelector(".foneinput").classList.add('escondidinho');
+            form.classList.remove('escondidinho');
+            form.classList.add('mostradinho');
+            botao.textContent = "BUSCAR";
+            opcao = 2;
+        }
+
+        function remover() {
+            limparMensagens();
+            const form = document.querySelector(".formulario");
+            const botao = document.querySelector("#enviar");
+            document.querySelector(".foneinput").classList.add('escondidinho');
+            form.classList.remove('escondidinho');
+            form.classList.add('mostradinho');
+            botao.textContent = "APAGAR";
+            opcao = 3;
+        }
+
+        function existe(nome, fone) {
+            return listaDContato.some((contato) =>
+                contato.Nome.toLowerCase() === nome.toLowerCase() && contato.fone === fone
+            );
+        }
+
+        /* 
+           Função apagar ajustada: retorna 'true' se encontrou e apagou o contato, 
+           ou 'false' se o contato não existia para apagar.
+        */
+        function apagar(nome) {
+            let encontrado = false;
+            for (let i = 0; i < listaDContato.length; i++) {
+                if (listaDContato[i].Nome.toLowerCase() === nome.toLowerCase()) {
+                    listaDContato.splice(i, 1);
+                    encontrado = true;
+                    break;
+                }
+            }
+            return encontrado;
+        }
+
+        function encontrar(nome) {
+            document.querySelector("#contatos").textContent = "";
+            document.querySelector("#erro").textContent = "";
+
+            const resultados = listaDContato.filter(contato =>
+                contato.Nome.toLowerCase() === nome.toLowerCase()
+            );
+
+            if (resultados.length > 0) {
+                resultados.forEach(contato => {
+                    document.querySelector("#contatos").innerHTML += `
+                    <div class="grid grid-cols-2 bg-black/60 p-3 rounded-lg border-2 border-yellow-400 sombra-neon-amarela transform -rotate-1">
+                        <span class="fonte-tag text-2xl text-yellow-300"><strong>NOME:</strong> ${contato.Nome}</span>
+                        <span class="fonte-tag text-2xl text-cyan-300"><strong>FONE:</strong> ${contato.fone}</span>
+                    </div>`;
+                });
+            } else {
+                document.querySelector("#erro").innerHTML = '<p class="sombra-neon-rosa">CONTATO NÃO ENCONTRADO!</p>';
+            }
+        }
+
+        function enviarinput(event) {
+            event.preventDefault();
+            const form = document.querySelector(".formulario");
+            form.classList.remove('mostradinho');
+            form.classList.add('escondidinho');
+
+            let nome = document.querySelector("#nome").value;
+            let fone = document.querySelector("#fone").value;
+            document.querySelector("#nome").value = "";
+            document.querySelector("#fone").value = "";
+
+            switch (opcao) {
+                case 1:
+                    if (nome.trim() !== "") {
+                        if (!existe(nome, fone)) {
+                            listaDContato.push({ Nome: nome, fone: fone });
+                            listar();
+                        } else {
+                            document.querySelector("#erro").innerHTML = '<p class="sombra-neon-rosa">ESTE CONTATO JÁ EXISTE!</p>';
+                        }
+                    }
+                    break;
+                case 2:
+                    if (nome.trim() !== "") encontrar(nome);
+                    break;
+                case 3:
+                    if (nome.trim() !== "") {
+                        let apagou = apagar(nome);
+                        if (apagou) {
+                            listar();
+                        } else {
+                            document.querySelector("#erro").innerHTML = '<p class="sombra-neon-rosa">CONTATO NÃO ENCONTRADO PARA APAGAR!</p>';
+                        }
+                    }
+                    break;
+            }
+        }
+
+        function listar() {
+            limparMensagens();
+            document.querySelector("#contatos").innerHTML = "";
+            listaDContato.forEach((contato) => {
+                document.querySelector("#contatos").innerHTML += `
+                    <div class="grid grid-cols-2 bg-black/60 p-3 rounded-lg border-2 border-yellow-400 transform hover:scale-102 transition">
+                        <span class="fonte-tag text-2xl text-yellow-300"><strong>NOME:</strong> ${contato.Nome}</span>
+                        <span class="fonte-tag text-2xl text-cyan-300"><strong>FONE:</strong> ${contato.fone}</span>
+                    </div>`;
+            });
+        }
+
+        document.querySelector("#listar").addEventListener("click", listar);
+        document.querySelector("#adicionar").addEventListener("click", adicionar);
+        document.querySelector("#buscar").addEventListener("click", buscar);
+        document.querySelector("#remover").addEventListener("click", remover);
+        document.querySelector("#enviar").addEventListener("click", enviarinput);
+
+        listar();
+    </script>
+</body>
+
+</html>

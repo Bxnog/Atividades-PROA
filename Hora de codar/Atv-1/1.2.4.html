@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var numeros = []
+
+        for(i = 0; i < 3; i++){
+            numeros.push(parseFloat(prompt(`Digite o ${i + 1}° numero.`)))
+        }
+
+        numeros.sort((a, b) => b - a)
+
+        alert(`Soma dos 2 maiores: ${numeros[0] + numeros[1]}`)
+    </script>
+</head>
+<body>
+</body>
+</html>
