@@ -13,6 +13,9 @@
                 this.nome = nome;
                 this.nivelDeFome = 50;
                 this.nivelFelicidade = 50;
+                this.cansaco = 0;
+                this.idade = 0;
+                this.vivo = true;
             }
 
             alimentar() {
@@ -24,16 +27,45 @@
                 this.nivelFelicidade += 10;
                 console.log(`${this.nome} está brincando e se sentindo mais feliz.`);
             }
+            descansar() {
+                this.cansaco -= 40;
+                if(this.cansaco < 0){
+                    this.cansaco = 0;
+                }
+                if(this.cansaco != 0){console.log(`${this.nome} está descansando e se sentindo mais feliz.`);}
+                else if(this.cansaco == 0){console.log(`${this.nome} esta pronto para brincar!`);}
+            }
 
             verificarStatus() {
                 console.log(`Status atual de ${this.nome}:`);
                 console.log(`Nível de fome: ${this.nivelDeFome}`);
                 console.log(`Nível de felicidade: ${this.nivelFelicidade}`);
+                console.log(`Nível de Cansaço: ${this.cansaco}`);
             }
 
             passarTempo() {
-                this.nivelDeFome += 5;
+                this.nivelDeFome += 3;
+                this.nivelFelicidade -= 3;
+                this.cansaco += 10;
+                this.idade += 1;
+                this.derrota()
                 console.log(`${this.nome} está ficando mais faminto com o passar do tempo.`);
+                return true;
+            }
+            derrota(){
+
+                if(this.nivelDeFome >= 100){
+                    console.log(`${this.nome} morreu de fome :(`);
+                    this.vivo = false;
+                }
+                if(this.nivelFelicidade <= 0){
+                    console.log(`${this.nome} morreu de Tristeza :(`);
+                    this.vivo = false;
+                }
+                if(this.cansaco >= 100){
+                    console.log(`${this.nome} morreu de Cansaço! :(`);
+                    this.vivo = false;
+                }
             }
         }
     </script>
@@ -42,14 +74,15 @@
         // Programa Principal
         console.log("Bem-vindo ao Simulador de Animal de Estimação Virtual!");
         const nomePet = prompt("Digite o nome do seu animal de estimação:") || "Baltazar Guilherme Tenório";
-        const pet = new VirtualPet(nomePet);
+        const pet = and  = new BichinhoVirtual(nomePet);
 
         while (true) {
             console.log("\nEscolha uma ação:");
             console.log("1. Alimentar " + nomePet);
             console.log("2. Brincar com " + nomePet);
-            console.log("3. Verificar o status de " + nomePet);
-            console.log("4. Sair");
+            console.log("3. Descansar " + nomePet);
+            console.log("4. Verificar o status de " + nomePet);
+            console.log("5. Sair");
 
             const escolha = parseInt(prompt("Escolha uma opção:"));
 
@@ -61,16 +94,23 @@
                     pet.brincar();
                     break;
                 case 3:
-                    pet.verificarStatus();
+                    pet.descansar();
                     break;
                 case 4:
+                    pet.verificarStatus();
+                    break;
+                case 5:
                     console.log("Saindo do Simulador de Animal de Estimação Virtual. Adeus!");
                     process.exit();
                 default:
                     console.log("Escolha inválida. Tente novamente.");
             }
 
-            pet.passarTempo(); // Simula o tempo que passa após cada ação
+            pet.passarTempo()// Simula o tempo que passa após cada ação
+            if(this.vivo == false){
+                console.log("O jogo acabou!");
+                break;
+            }
         }
     </script>
 </head>
