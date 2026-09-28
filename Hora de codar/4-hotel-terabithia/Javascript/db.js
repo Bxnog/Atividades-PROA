@@ -1,190 +1,211 @@
 export const hotel_sistem = {
     senha: "2678",
-    nomeHotel: "Terabithia",
+    usuarios: [],
     usuario_atual: { nome: "Breno" },
+    nomeHotel: "Aura + Quarto",
 
     // ==============================================================================================
     // Quartos
     // ==============================================================================================
-    quartos: Array.from({ length: 20 }, (_, index) => ({ 
-        numero: index + 1, 
-        livre: true, 
-        hospede: null 
-    })),
+    quartos: Array.from({ length: 20 }, (_, index) => ({ numero: index + 1, livre: true, hospede: null })),
 
     gerarMapaQuartos() {
-        let mapa = `=== MAPA DE QUARTOS - HOTEL ${this.nomeHotel.toUpperCase()} ===\n\n`;
-        this.quartos.forEach((quarto, index) => {
-            const status = quarto.livre ? "L" : "O";
-            const numFormatado = String(quarto.numero).padStart(2, '0');
-            mapa += `Q${numFormatado}: [${status}]    `;
+        let mapa = `======================================\n`;
+        mapa += `   MAPA DE QUARTOS - ${this.nomeHotel.toUpperCase()}\n`;
+        mapa += `======================================\n\n`;
 
-            // Quebra de linha a cada 5 quartos (Grade 4x5)
+        this.quartos.forEach((quarto, index) => {
+            const numFormatado = String(quarto.numero).padStart(2, '0');
+            mapa += `[ ${numFormatado} : ${quarto.livre ? "L" : "O"} ]  `;
             if ((index + 1) % 5 === 0) {
-                mapa += "\n";
+                mapa += "\n\n";
             }
         });
+
+        mapa += `--------------------------------------\n`;
+        mapa += `Legenda: [ L ] Livre  |  [ O ] Ocupado`;
         alert(mapa);
     },
 
     // ==============================================================================================
-    // Hóspedes
+    // Hospedes
     // ==============================================================================================
     hospedes: [],
 
     cadastrarHospede(hospede) {
-        if (!hospede || typeof hospede !== 'string') {
-            alert("Não é possível cadastrar o hóspede. Nome inválido.");
+        hospede = hospede.trim();
+        if (!this.valor_valido(hospede, "string", 0, 0)) {
+            alert("⚠️ Não é possível cadastrar o hóspede. Nome inválido.");
             return false;
         }
 
-        const nomeFormatado = hospede.trim();
-        if (!this.valor_valido(nomeFormatado, "string", 0, 0)) {
-            alert("Não é possível cadastrar o hóspede. Nome inválido.");
-            return false;
-        }
-
-        // Requisito 5.2: Limite de 15 hóspedes
         if (this.hospedes.length >= 15) {
-            alert("Máximo de cadastros atingido");
+            alert("⚠️ Máximo de cadastros atingido (Limite: 15 hóspedes).");
             return false;
         }
 
-        // Verifica duplicidade por nome exato
-        const jaExiste = this.hospedes.some(
-            h => h?.nome?.toLowerCase() === nomeFormatado.toLowerCase()
-        );
-
+        const jaExiste = this.hospedes.some(h => h.nome.toLowerCase() === hospede.toLowerCase());
         if (jaExiste) {
-            alert("Hóspede já cadastrado");
+            alert("⚠️ Hóspede já cadastrado!");
             return false;
         }
 
-        const dataCadastro = new Date().toLocaleString('pt-BR', { 
-            dateStyle: 'short', 
-            timeStyle: 'short' 
-        });
-
-        this.hospedes.push({ nome: nomeFormatado, dataCadastro });
-        alert("Operação realizada com sucesso");
+        const dataCadastro = new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+        this.hospedes.push({ nome: hospede, dataCadastro: dataCadastro });
+        alert(`✅ Hóspede "${hospede}" cadastrado com sucesso!`);
         return true;
     },
 
+    // ==============================================================================================
+    // Buscas
+    // ==============================================================================================
     buscarNomeExato(nome) {
-        if (!nome || typeof nome !== 'string') {
-            alert("Nome inválido para pesquisa.");
-            return -1;
+        if (!nome) return false;
+        nome = nome.trim();
+        if (!this.valor_valido(nome, "string", 0, 0)) {
+            alert("⚠️ Nome inválido para pesquisa.");
+            return false;
         }
 
-        const termo = nome.trim().toLowerCase();
-        const indexEncontrado = this.hospedes.findIndex(
-            h => h?.nome?.toLowerCase() === termo
-        );
+        const indexHEncontrado = this.hospedes.findIndex(h => h?.nome?.toLowerCase() === nome.toLowerCase());
 
-        if (indexEncontrado !== -1) {
-            const h = this.hospedes[indexEncontrado];
-            alert(`Hóspede [${indexEncontrado + 1}] foi encontrado.\nNome: ${h.nome}\nData de Cadastro: ${h.dataCadastro}`);
+        if (indexHEncontrado !== -1) {
+            const h = this.hospedes[indexHEncontrado];
+            alert(`🔍 HÓSPEDE ENCONTRADO\n\n` +
+                `📌 Índice: [${indexHEncontrado + 1}]\n` +
+                `👤 Nome: ${h.nome}\n` +
+                `📅 Data de Cadastro: ${h.dataCadastro}`);
         } else {
-            alert("Hóspede não encontrado");
+            alert("❌ Hóspede não encontrado.");
         }
-
-        return indexEncontrado;
     },
 
     buscarPrefixo(prefixo) {
-        if (!prefixo || typeof prefixo !== 'string') {
-            alert("Prefixo inválido.");
-            return;
+        if (!prefixo) return false;
+        prefixo = prefixo.trim().toLowerCase();
+        if (!this.valor_valido(prefixo, "string", 0, 0)) {
+            alert("⚠️ Nome inválido para pesquisa.");
+            return false;
         }
 
-        const termo = prefixo.trim().toLowerCase();
-        const encontrados = this.hospedes
-            .map((hospede, index) => ({ ...hospede, indexOriginal: index }))
-            .filter(h => h?.nome?.toLowerCase().startsWith(termo));
+        // Busca o elemento e seu índice real na lista original
+        const resultados = this.hospedes
+            .map((h, i) => ({ ...h, realIndex: i + 1 }))
+            .filter(h => h.nome.toLowerCase().startsWith(prefixo));
 
-        if (encontrados.length === 0) {
-            alert("Hóspede não encontrado");
-            return;
+        if (resultados.length === 0) {
+            return alert("❌ Nenhum hóspede encontrado com esse prefixo.");
         }
 
-        let mensagem = "Resultados:\n";
-        encontrados.forEach(h => {
-            mensagem += `[${h.indexOriginal + 1}] ${h.nome}\n`;
+        let mensagem = `🔍 RESULTADOS ENCONTRADOS (${resultados.length})\n`;
+        mensagem += `--------------------------------------\n`;
+        resultados.forEach(h => {
+            mensagem += `[${h.realIndex}] ${h.nome} (Cadastrado em: ${h.dataCadastro})\n`;
         });
+
         alert(mensagem);
     },
 
+    // ==============================================================================================
+    // Listagem e Edição
+    // ==============================================================================================
     listarOrdenado() {
         if (this.hospedes.length === 0) {
-            alert("Nenhum hóspede cadastrado.");
+            alert("ℹ️ Nenhum hóspede cadastrado até o momento.");
             return;
         }
 
-        // Cópia para ordenar sem alterar os índices originais da lista base
-        const ordenados = this.hospedes
-            .map((h, index) => ({ ...h, indexOriginal: index }))
+        // Mapeia o índice original antes de ordenar alfabeticamente
+        let hospedes_ordenados = this.hospedes
+            .map((h, i) => ({ ...h, realIndex: i + 1 }))
             .sort((a, b) => a.nome.localeCompare(b.nome));
 
-        let mensagem = "=== Lista de Hóspedes (A-Z) ===\n";
-        ordenados.forEach(h => {
-            mensagem += `[${h.indexOriginal + 1}] ${h.nome} - Cadastro: ${h.dataCadastro}\n`;
+        let lista = `📋 LISTA DE HÓSPEDES - ${this.nomeHotel.toUpperCase()}\n`;
+        lista += `--------------------------------------\n`;
+        lista += `Índice  |  Nome  |  Data de Cadastro\n`;
+        lista += `--------------------------------------\n`;
+
+        hospedes_ordenados.forEach(h => {
+            lista += `[${h.realIndex}] ${h.nome} - (${h.dataCadastro})\n`;
         });
-        alert(mensagem);
+
+        alert(lista);
     },
 
-    atualizarHospede(indexFormatado, novoNome) {
-        const index = indexFormatado - 1;
-        if (index < 0 || index >= this.hospedes.length || isNaN(index)) {
-            alert("Índice inválido.");
+    atualizarCadastro(resposta) {
+        const index = parseInt(resposta) - 1;
+        if (isNaN(index) || index < 0 || index >= this.hospedes.length) {
+            alert("❌ Hóspede não encontrado.");
             return false;
         }
 
-        if (!novoNome || typeof novoNome !== 'string' || novoNome.trim().length === 0) {
-            alert("Nome inválido.");
-            return false;
+        let novoNome = prompt(`Editar hóspede [${index + 1}]: ${this.hospedes[index].nome}\nDigite o novo nome:`);
+        while (novoNome !== null) {
+            novoNome = novoNome.trim();
+            if (novoNome === "") {
+                alert("⚠️ Nome inválido.");
+            } else {
+                const jaExiste = this.hospedes.some((h, i) => i !== index && h.nome.toLowerCase() === novoNome.toLowerCase());
+                if (jaExiste) {
+                    alert("⚠️ Hóspede já cadastrado com esse nome!");
+                } else {
+                    this.hospedes[index].nome = novoNome;
+                    alert("✅ Operação realizada com sucesso!");
+                    return true;
+                }
+            }
+            novoNome = prompt("Digite o novo nome:");
         }
-
-        const nomeFormatado = novoNome.trim();
-        const jaExiste = this.hospedes.some(
-            (h, idx) => idx !== index && h.nome.toLowerCase() === nomeFormatado.toLowerCase()
-        );
-
-        if (jaExiste) {
-            alert("Hóspede já cadastrado");
-            return false;
-        }
-
-        this.hospedes[index].nome = nomeFormatado;
-        alert("Operação realizada com sucesso");
-        return true;
+        return false;
     },
 
-    removerHospede(indexFormatado) {
-        const index = indexFormatado - 1;
-        if (index < 0 || index >= this.hospedes.length || isNaN(index)) {
-            alert("Índice inválido.");
+    removerCadastro(resposta) {
+        const index = parseInt(resposta) - 1;
+        if (isNaN(index) || index < 0 || index >= this.hospedes.length) {
+            alert("❌ Hóspede não encontrado.");
             return false;
         }
 
+        const nomeRemovido = this.hospedes[index].nome;
         this.hospedes.splice(index, 1);
-        alert("Operação realizada com sucesso");
+        alert(`✅ Operação realizada com sucesso!\nHóspede "${nomeRemovido}" removido.`);
         return true;
     },
 
-    // ==============================================================================================
-    // Validação
-    // ==============================================================================================
     valor_valido(valor, tipo, limite_i, limite_s) {
         if (tipo === "string") {
-            if (!valor || valor.trim().length === 0) {
+            if (!valor || valor.length === 0) {
                 return false;
             }
         } else if (tipo === "int") {
-            const num = parseInt(valor);
-            if (isNaN(num) || num < limite_i || num > limite_s) {
+            valor = parseInt(valor);
+            if (isNaN(valor)) {
+                return false;
+            }
+            if (valor < limite_i || valor > limite_s) {
+                alert(`⚠️ Valor inválido! Digite um valor entre ${limite_i} e ${limite_s}.`);
                 return false;
             }
         }
         return true;
+    },
+    calcularMelhorOpcao(postos) {
+        let melhorOpcao = null;
+        let melhorPosto = null;
+        let menorPreco = Infinity;
+        let tanque = 42;
+        for (let posto of postos) {
+            let custoGasolina = posto.precoGasolina * tanque;
+            let custoAlcool = posto.precoAlcool * tanque;
+            let combustivelIdeal = posto.precoAlcool <= posto.precoGasolina * 0.70 ? "Álcool" : "Gasolina";
+            let custoFinal = combustivelIdeal === "Álcool" ? custoAlcool : custoGasolina;
+            if (custoFinal < menorPreco) {
+                menorPreco = custoFinal;
+                melhorPosto = posto.Nome;
+                melhorOpcao = combustivelIdeal;
+            }
+            
+        }
+        alert(`Melhor opção: ${melhorOpcao} no posto ${melhorPosto} com custo de R$ ${menorPreco.toFixed(2)}`);
     }
 };

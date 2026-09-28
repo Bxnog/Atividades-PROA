@@ -6,6 +6,7 @@
 	<script type="module">
 		import { reservarQuarto } from "./reserva_quarto.js";
 		import { cadastrarHospede } from "./cadastrar_hospede.js";
+		import { abastecerCarro } from "./abastecimentoCarro.js";
 
 
 		function inicio() {
@@ -19,7 +20,7 @@
 				cadastrarHospede()
 				inicio()
 			} else if (escolha === 3) {
-				abastecer_carros();
+				abastecerCarro();
 			} else if (escolha === 4) {
 				sair();
 			} else {
