@@ -1,0 +1,25 @@
+.btn-lg {
+    background-color: var(--cor-identidade);
+    color: #fff;
+    border: none;
+}
+
+.text-secondary {
+    color: var(--muted) !important;
+}
+
+.form-text {
+    color: var(--muted);
+}
+
+.btn-outline-secondary {
+    background-color: var(--surface);
+    color: var(--ink);
+    border-color: var(--border);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--branco-hover);
+    color: var(--ink);
+    border-color: var(--border);
+}

@@ -1,0 +1,23 @@
+a {
+    color: var(--cor-identidade);
+}
+
+.btn {
+    background-color: var(--cor-identidade);
+    color: #fff;
+    border: none;
+}
+
+.btn:hover {
+    background-color: var(--cor-identidade-hover);
+    color: #fff;
+}
+
+.form-label {
+    align-items: flex-end;
+}
+
+/* Breadcrumb visibility in dark mode */
+.breadcrumb-active {
+    color: var(--ink);
+}

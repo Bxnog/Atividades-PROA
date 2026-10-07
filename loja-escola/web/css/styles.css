@@ -1,0 +1,214 @@
+@font-face {
+    font-family: 'ComicSans';
+  src: url('../../fonts/ComicSansMS.woff2') format('woff2'),
+     url('../../fonts/ComicSansMS.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Klavika';
+  src: url('../../fonts/klavika-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Klavika';
+  src: url('../../fonts/klavika-bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+
+
+
+:root {
+  --surface: #f1f0ec;
+  --ink: #222;
+  --muted: #666;
+  --border: #d9d5cc;
+  --accent-soft: #e8ff7a;
+  --cor-identidade: #e7310d;
+  --cor-identidade-hover: #721d0c;
+  --background: #fff;
+  --branco-hover: #ebeae8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #222;
+    --ink: #f1f0ec;
+    --muted: #aaa;
+    --border: #444;
+    --accent-soft: #b8cc52;
+    --cor-identidade: #e7310d;
+    --cor-identidade-hover: #ff4a24;
+    --background: #151515;
+    --branco-hover: #2d2d2d;
+  }
+}
+
+
+body {
+  color: var(--ink);
+  background: var(--background);
+}
+
+.skip-link {position: absolute;top: -60px;left: 1rem;z-index: 1000;padding: .75rem 1rem;background: #000;color: #fff;}
+
+.skip-link:focus {top: 1rem;}
+
+.site-header {border-bottom: 1px solid var(--border);background:var(--background);}
+
+.hero {background: var(--surface);border-bottom: 1px solid var(--border);}
+
+.eyebrow {font-size: .85rem;font-weight: 700;letter-spacing: .08em;text-transform: uppercase;}
+
+.product-filter {width: min(100%, 320px);}
+
+.product-card {border: 1px solid var(--border);border-radius: 8px;box-shadow: none;}
+
+.product-card:hover {transform: translateY(-2px);}
+
+.product-illustration,
+.product-detail-illustration {display: grid;place-items: center;background: var(--surface);border: 1px solid var(--border);background-size: cover;background-position: center;background-repeat: no-repeat;}
+/* Imagens de produtos */
+.product-illustration {min-height: 190px;}
+
+.product-detail-illustration {min-height: 440px;border-radius: 10px;}
+/* ============================================================================================================ */
+.price {font-size: 1.2rem;font-weight: 700;}
+
+.price-large {font-size: 2rem;}
+
+.quantity-field {max-width: 120px;}
+
+.learning-note,
+.summary-box {padding: 1.25rem;background: var(--surface);border: 1px solid var(--border);border-radius: 8px;}
+
+.summary-box {position: sticky;top: 1rem;
+}
+
+.success-panel {max-width: 720px;padding: 3rem 1.5rem;
+}
+
+.success-icon {display: grid;place-items: center;width: 72px;height: 72px;margin: 0 auto 1.5rem;border-radius: 50%;background: var(--accent-soft);font-size: 2rem;font-weight: 800;
+}
+
+.order-data {display: grid;gap: 1rem;margin: 2rem 0;text-align: left;
+}
+
+.order-data>div {padding: 1rem;border: 1px solid var(--border);
+}
+
+.order-data dt {font-size: .85rem;color: var(--muted);
+}
+
+.order-data dd {margin: .25rem 0 0;font-weight: 700;
+}
+
+.site-footer {margin-top: 4rem;background: #171717;color: #fff;
+}
+
+.navbar-brand{
+  font-family: 'Klavika', 'ComicSans', Arial, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--cor-identidade);
+}
+.navbar-brand:hover {
+  color: var(--cor-identidade);
+  text-decoration: none;
+}
+.navbar .nav-link {
+  color: var(--ink);
+}
+
+.navbar .nav-link.active {
+  color: var(--ink);
+  border-bottom: 2px solid var(--cor-identidade);
+}
+
+.navbar .nav-link:hover {
+  color: var(--ink);
+}
+
+.verDetalhes {
+  background-color: var(--cor-identidade);
+  color: #fff;
+  
+}
+.verDetalhes:hover {
+  background-color: var(--cor-identidade-hover);
+  text-decoration: none;
+  color: #fff;
+}
+.card-body {
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.heroi {
+  background-image: url('../../images/hero.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--background);
+}
+.form-control {
+  background-color: var(--surface);
+  color: var(--ink);
+  border-color: var(--border);
+  border-radius: 4px;
+  padding: .5rem;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.form-control:focus {
+  background-color: var(--surface);
+  color: var(--ink);
+  border-color: var(--cor-identidade);
+  box-shadow: 0 0 0 0.25rem var(--accent-soft);
+}
+
+.form-select {
+  background-color: var(--surface);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.form-select:focus {
+  background-color: var(--surface);
+  color: var(--ink);
+  border-color: var(--cor-identidade);
+  box-shadow: 0 0 0 0.25rem var(--accent-soft);
+}
+
+.form-label {
+  color: var(--ink);
+}
+
+.form-check-input {
+  background-color: var(--background);
+  border-color: var(--border);
+}
+
+.form-check-input:checked {
+  background-color: var(--cor-identidade);
+  border-color: var(--cor-identidade);
+}
+
+.destaque {
+  color: var(--cor-identidade)
+}
+
+/* TODO didático:
+   - melhorar estados de hover/focus;
+   - revisar espaçamentos;
+   - criar uma identidade visual mais consistente;
+   - revisar telas muito pequenas;
+   - avaliar prefers-reduced-motion antes de adicionar animações.
+*/
