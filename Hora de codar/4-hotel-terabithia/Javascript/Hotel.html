@@ -7,11 +7,12 @@
 		import { reservarQuarto } from "./reserva_quarto.js";
 		import { cadastrarHospede } from "./cadastrar_hospede.js";
 		import { abastecerCarro } from "./abastecimentoCarro.js";
+		import { agendarEvento } from "./eventos.js";
 
 
 		function inicio() {
 
-			var escolha = parseInt(prompt('Selecione uma opção 1.) Reserva de Quartos 2.) Cadastro de Hóspedes 3.) Abastecimento de Carros 4.) Sair'));
+			var escolha = parseInt(prompt('Selecione uma opção 1.) Reserva de Quartos 2.) Cadastro de Hóspedes 3.) Abastecimento de Carros 4.) Agendar Eventos 5.) Sair'));
 
 			if (escolha === 1) {
 				reservarQuarto();
@@ -22,6 +23,8 @@
 			} else if (escolha === 3) {
 				abastecerCarro();
 			} else if (escolha === 4) {
+				agendarEvento();
+			} else if (escolha === 5) {
 				sair();
 			} else {
 				erro();

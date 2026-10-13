@@ -35,24 +35,24 @@ export const hotel_sistem = {
     cadastrarHospede(hospede) {
         hospede = hospede.trim();
         if (!this.valor_valido(hospede, "string", 0, 0)) {
-            alert("⚠️ Não é possível cadastrar o hóspede. Nome inválido.");
+            alert(" Não é possível cadastrar o hóspede. Nome inválido.");
             return false;
         }
 
         if (this.hospedes.length >= 15) {
-            alert("⚠️ Máximo de cadastros atingido (Limite: 15 hóspedes).");
+            alert(" Máximo de cadastros atingido (Limite: 15 hóspedes).");
             return false;
         }
 
         const jaExiste = this.hospedes.some(h => h.nome.toLowerCase() === hospede.toLowerCase());
         if (jaExiste) {
-            alert("⚠️ Hóspede já cadastrado!");
+            alert(" Hóspede já cadastrado!");
             return false;
         }
 
         const dataCadastro = new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
         this.hospedes.push({ nome: hospede, dataCadastro: dataCadastro });
-        alert(`✅ Hóspede "${hospede}" cadastrado com sucesso!`);
+        alert(` Hóspede "${hospede}" cadastrado com sucesso!`);
         return true;
     },
 
@@ -63,7 +63,7 @@ export const hotel_sistem = {
         if (!nome) return false;
         nome = nome.trim();
         if (!this.valor_valido(nome, "string", 0, 0)) {
-            alert("⚠️ Nome inválido para pesquisa.");
+            alert(" Nome inválido para pesquisa.");
             return false;
         }
 
@@ -71,12 +71,12 @@ export const hotel_sistem = {
 
         if (indexHEncontrado !== -1) {
             const h = this.hospedes[indexHEncontrado];
-            alert(`🔍 HÓSPEDE ENCONTRADO\n\n` +
-                `📌 Índice: [${indexHEncontrado + 1}]\n` +
-                `👤 Nome: ${h.nome}\n` +
-                `📅 Data de Cadastro: ${h.dataCadastro}`);
+            alert(` HÓSPEDE ENCONTRADO\n\n` +
+                ` Índice: [${indexHEncontrado + 1}]\n` +
+                ` Nome: ${h.nome}\n` +
+                ` Data de Cadastro: ${h.dataCadastro}`);
         } else {
-            alert("❌ Hóspede não encontrado.");
+            alert(" Hóspede não encontrado.");
         }
     },
 
@@ -94,7 +94,7 @@ export const hotel_sistem = {
             .filter(h => h.nome.toLowerCase().startsWith(prefixo));
 
         if (resultados.length === 0) {
-            return alert("❌ Nenhum hóspede encontrado com esse prefixo.");
+            return alert(" Nenhum hóspede encontrado com esse prefixo.");
         }
 
         let mensagem = `🔍 RESULTADOS ENCONTRADOS (${resultados.length})\n`;
@@ -111,16 +111,15 @@ export const hotel_sistem = {
     // ==============================================================================================
     listarOrdenado() {
         if (this.hospedes.length === 0) {
-            alert("ℹ️ Nenhum hóspede cadastrado até o momento.");
+            alert(" Nenhum hóspede cadastrado até o momento.");
             return;
         }
 
-        // Mapeia o índice original antes de ordenar alfabeticamente
         let hospedes_ordenados = this.hospedes
             .map((h, i) => ({ ...h, realIndex: i + 1 }))
             .sort((a, b) => a.nome.localeCompare(b.nome));
 
-        let lista = `📋 LISTA DE HÓSPEDES - ${this.nomeHotel.toUpperCase()}\n`;
+        let lista = ` LISTA DE HÓSPEDES - ${this.nomeHotel.toUpperCase()}\n`;
         lista += `--------------------------------------\n`;
         lista += `Índice  |  Nome  |  Data de Cadastro\n`;
         lista += `--------------------------------------\n`;
@@ -135,7 +134,7 @@ export const hotel_sistem = {
     atualizarCadastro(resposta) {
         const index = parseInt(resposta) - 1;
         if (isNaN(index) || index < 0 || index >= this.hospedes.length) {
-            alert("❌ Hóspede não encontrado.");
+            alert(" Hóspede não encontrado.");
             return false;
         }
 
@@ -143,14 +142,14 @@ export const hotel_sistem = {
         while (novoNome !== null) {
             novoNome = novoNome.trim();
             if (novoNome === "") {
-                alert("⚠️ Nome inválido.");
+                alert(" Nome inválido.");
             } else {
                 const jaExiste = this.hospedes.some((h, i) => i !== index && h.nome.toLowerCase() === novoNome.toLowerCase());
                 if (jaExiste) {
-                    alert("⚠️ Hóspede já cadastrado com esse nome!");
+                    alert(" Hóspede já cadastrado com esse nome!");
                 } else {
                     this.hospedes[index].nome = novoNome;
-                    alert("✅ Operação realizada com sucesso!");
+                    alert(" Operação realizada com sucesso!");
                     return true;
                 }
             }
@@ -162,13 +161,13 @@ export const hotel_sistem = {
     removerCadastro(resposta) {
         const index = parseInt(resposta) - 1;
         if (isNaN(index) || index < 0 || index >= this.hospedes.length) {
-            alert("❌ Hóspede não encontrado.");
+            alert(" Hóspede não encontrado.");
             return false;
         }
 
         const nomeRemovido = this.hospedes[index].nome;
         this.hospedes.splice(index, 1);
-        alert(`✅ Operação realizada com sucesso!\nHóspede "${nomeRemovido}" removido.`);
+        alert(` Operação realizada com sucesso!\nHóspede "${nomeRemovido}" removido.`);
         return true;
     },
 
@@ -183,7 +182,7 @@ export const hotel_sistem = {
                 return false;
             }
             if (valor < limite_i || valor > limite_s) {
-                alert(`⚠️ Valor inválido! Digite um valor entre ${limite_i} e ${limite_s}.`);
+                alert(` Valor inválido! Digite um valor entre ${limite_i} e ${limite_s}.`);
                 return false;
             }
         }
@@ -204,8 +203,21 @@ export const hotel_sistem = {
                 melhorPosto = posto.Nome;
                 melhorOpcao = combustivelIdeal;
             }
-            
+
         }
         alert(`Melhor opção: ${melhorOpcao} no posto ${melhorPosto} com custo de R$ ${menorPreco.toFixed(2)}`);
+    },
+    // =============================================================================
+    // Eventos 
+    // =============================================================================
+    escolherSalao(nConvidados) {
+        let saloes = [{ id: 1, nome: "Laranja", capacidade: 220 }, { id: 2, nome: "Colorado", capacidade: 350 }]
+        for(let i = 0; i < saloes.length; i++){
+            if(saloes[i].capacidade < nConvidados){
+                continue
+            }
+            return [saloes[i].nome, saloes[i].capacidade - nConvidados]
+        }
     }
+
 };
