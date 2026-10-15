@@ -1,0 +1,12 @@
+[   
+  {
+    "id": 1,
+    "user": "Cachorro",
+    "location": "Sampa, Brasil",
+    "avatar": "/public/images/7.jpg",
+    "image": "/public/images/7.jpg",
+    "alt": "Xícara de café ao lado de um teclado",
+    "likes": 87,
+    "caption": "Matando falso gangster, comendo a comida do meu dono."
+  } 
+]
