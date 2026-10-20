@@ -1,0 +1,252 @@
+[
+  {
+    "_id": 51,
+    "Name": "Kratos ",
+    "universe": "god Of war ",
+    "powerLevel": "99",
+    "equipment": ["Blades of chaos","Leviathan axe", "Shield"],
+    "species": "demi-god",
+    "movies": "God Of War Ragnarök",
+    "debut_year": "2005"
+  },
+  {
+    "_id": 52,
+    "char_name": "Lara croft",
+    "Universe": "Tomb raider",
+    "powerlevel": "78",
+    "equipment": "guns, backpack, climbing axe",
+    "species": "Human",
+    "movies": ["Tomb Raider", "Cradle of Life"],
+    "debut_year": 1996
+  },
+  {
+    "_id": 53,
+    "Nome": "Geralt of rivia",
+    "universe": "the witcher ",
+    "PowerLevel": "88",
+    "equipment": ["silver sword", "steel sword", ""],
+    "species": "mutant human",
+    "movies": "The Witcher (Netflix)",
+    "debut_year": "2007"
+  },
+  {
+    "_id": 54,
+    "name": "Naruto uzumaki",
+    "Universe": "Naruto Shippuden",
+    "power_level": "90",
+    "equipment": ["kunai", "chakra cloak", "rasengan"],
+    "species": "Human (Jinchuriki)",
+    "movies": ["Naruto the Movie", "The Last: Naruto"],
+    "debut_year": "1999"
+  },
+  {
+    "_id": 55,
+    "charName": "Son Goku",
+    "universe": "dragonball Z",
+    "PowerLevel": "over 9000",
+    "equipment": "power pole, nimbus cloud",
+    "species": "Saiyan",
+    "movies": ["Battle of Gods", "Resurrection F"],
+    "debut_year": 1984
+  },
+  {
+    "_id": 56,
+    "Name": "Leia Organa",
+    "universe": "STAR wars",
+    "powerlevel": 75,
+    "equipment": ["blaster", "leadership"],
+    "species": "human",
+    "movies": "A New Hope, Return of the Jedi",
+    "debut_year": "1977"
+  },
+  {
+    "_id": 24,
+    "nome": "Optimus Prime",
+    "Universe": "Transformers ",
+    "PowerLevel": "98",
+    "equipment": ["ion blaster", "energy axe"],
+    "species": "Cybertronian ",
+    "movies": ["Transformers","Bumblebee"],
+    "debut_year": "1984"
+  },
+  {
+    "_id": 58,
+    "Char_name": "Ash ketchum",
+    "universe": "Pokemon",
+    "power_level": "55",
+    "equipment": "pokeballs, backpack, hat",
+    "species": "human",
+    "movies": ["Mewtwo Strikes Back","I Choose You!"],
+    "debut_year": "1997"
+  },
+  {
+    "_id": 59,
+    "Name": "Sonic the hedgehog",
+    "universe": "SEGA games",
+    "PowerLevel": "70",
+    "equipment": ["speed", "chaos emeralds"],
+    "species": "hedgehog",
+    "movies": "Sonic the Movie",
+    "debut_year": 1991
+  },
+  {
+    "_id": 60,
+    "char_name": "Link",
+    "universe": "Legend Of zelda",
+    "powerLevel": 82,
+    "equipment": "Master Sword, shield, bow",
+    "species": "Hylian",
+    "movies": null,
+    "debut_year": "1986"
+  },
+  {
+    "_id": 29,
+    "Nome": "Samus Aran",
+    "universe": "metroid",
+    "powerlevel": "84",
+    "equipment": ["power suit", "arm cannon", "morph ball"],
+    "species": "Human",
+    "movies": "N/A",
+    "debut_year": "1986"
+  },
+  {
+    "_id": 62,
+    "name": "Ezio Auditore ",
+    "Universe": "Assassins creed ",
+    "PowerLevel": "77",
+    "equipment": "hidden blades, sword, cape",
+    "species": "human",
+    "movies": ["Assassin's Creed (2016)"],
+    "debut_year": "2009"
+  },
+  {
+    "_id": 63,
+    "charName": "Rick Sanchez",
+    "universe": "Rick And morty",
+    "powerLevel": "infinite?",
+    "equipment": ["portal gun", "flask"],
+    "species": "human?",
+    "movies": "Rick and Morty Series",
+    "debut_year": 2013
+  },
+  {
+    "_id": 64,
+    "Name": "Morty smith",
+    "universe": "RICK and Morty ",
+    "power_level": "45",
+    "equipment": ["nervous energy"],
+    "species": "human",
+    "movies": "rick and morty series",
+    "debut_year": "2013"
+  },
+  {
+    "_id": 65,
+    "nome": "Aloy",
+    "Universe": "horizon zero dawn",
+    "PowerLevel": "83",
+    "equipment": "bow, spear, focus device",
+    "species": "human",
+    "movies": "N/A",
+    "debut_year": 2017
+  },
+  {
+    "_id": 66,
+    "Char_name": "Cloud strife",
+    "universe": "Final fantasy VII",
+    "powerlevel": "87",
+    "equipment": ["buster sword", "materia"],
+    "species": "Human",
+    "movies": ["Advent children"],
+    "debut_year": "1997"
+  },
+  {
+    "_id": 67,
+    "name": "Ellie ",
+    "Universe": "the last of us",
+    "PowerLevel": "70",
+    "equipment": "knife, revolver, immunity",
+    "species": "human",
+    "movies": "The Last of Us (HBO)",
+    "debut_year": "2013"
+  },
+  {
+    "_id": 20,
+    "char_name": "Joel miller",
+    "universe": "The Last Of us ",
+    "power_level": 71,
+    "equipment": ["rifle","brutal strength"],
+    "species": "human",
+    "movies": null,
+    "debut_year": "2013"
+  },
+  {
+    "_id": 69,
+    "Nome": "Master yoda",
+    "universe": "STAR WARS",
+    "PowerLevel": "94",
+    "equipment": "lightsaber, force wisdom",
+    "species": "Yoda species",
+    "movies": ["Empire Strikes Back","Attack of the Clones"],
+    "debut_year": 1980
+  },
+  {
+    "_id": 70,
+    "name": "Tony Stark (Zombie)",
+    "Universe": "Marvel What If",
+    "powerLevel": "65",
+    "equipment": ["armor","hunger"],
+    "species": "undead human",
+    "movies": ["What If...?"],
+    "debut_year": "2021"
+  },
+  {
+    "_id": 71,
+    "charName": "Diana Prince",
+    "universe": "dc comics ",
+    "PowerLevel": "92",
+    "equipment": ["lasso of truth","bracelets","shield"],
+    "species": "Amazonian demigoddess",
+    "movies": "Wonder Woman",
+    "debut_year": "1941"
+  },
+  {
+    "_id": 72,
+    "Name": "Thanos",
+    "universe": "MARVEL",
+    "powerlevel": "99 ",
+    "equipment": "infinity gauntlet, armor",
+    "species": "Titan",
+    "movies": ["Infinity War","Endgame"],
+    "debut_year": 1973
+  },
+  {
+    "_id": 73,
+    "nome": "Megaman",
+    "Universe": "Capcom games ",
+    "PowerLevel": "80",
+    "equipment": "Mega buster, armor",
+    "species": "android",
+    "movies": "N/A",
+    "debut_year": "1987"
+  },
+  {
+    "_id": 74,
+    "char_name": "John Wick",
+    "universe": "john wick universe ",
+    "power_level": 85,
+    "equipment": ["guns","dog","suit"],
+    "species": "Human",
+    "movies": ["John Wick","John Wick 4"],
+    "debut_year": 2014
+  },
+  {
+    "_id": 75,
+    "Name": "Saitama",
+    "universe": "one punch man",
+    "PowerLevel": "infinite",
+    "equipment": "fists, cape",
+    "species": "human (??)",
+    "movies": "One Punch Man Series",
+    "debut_year": 2012
+  }
+]
