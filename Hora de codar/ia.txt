@@ -1,3 +1,0 @@
-pastas :specs, skills
-
-documentações de ia
