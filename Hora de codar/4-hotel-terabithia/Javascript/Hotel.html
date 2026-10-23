@@ -1,68 +1,57 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-BR">
 <head>
-
+	<meta charset="UTF-8">
+	<title>Hotel Terabithia</title>
 	<script type="module">
+		import { hotel_sistem } from "./db.js";
 		import { reservarQuarto } from "./reserva_quarto.js";
 		import { cadastrarHospede } from "./cadastrar_hospede.js";
-		import { abastecerCarro } from "./abastecimentoCarro.js";
 		import { agendarEvento } from "./eventos.js";
+		import { compararArCondicionado } from "./ar_condicionado.js";
+		import { abastecerCarro } from "./abastecimentoCarro.js";
+		import { exibirRelatorios } from "./relatorios.js";
 
+		function login() {
+			alert(`Bem-vindo ao ${hotel_sistem.nomeHotel}`);
+			const nome = prompt("Digite seu nome:");
+			if (nome === null || !nome.trim()) return false;
+
+			for (let tentativa = 1; tentativa <= 3; tentativa++) {
+				const senha = prompt("Digite a senha:");
+				if (senha === null) return false;
+				if (senha === hotel_sistem.senha) {
+					hotel_sistem.usuario_atual = { nome: nome.trim() };
+					alert(`Bem-vindo ao Hotel ${hotel_sistem.nomeHotel}, ${nome.trim()}. É um imenso prazer ter você por aqui!`);
+					return true;
+				}
+				alert(`Senha incorreta. Tentativas restantes: ${3 - tentativa}`);
+			}
+			alert("Acesso bloqueado. Número máximo de tentativas excedido.");
+			return false;
+		}
 
 		function inicio() {
-
-			var escolha = parseInt(prompt('Selecione uma opção 1.) Reserva de Quartos 2.) Cadastro de Hóspedes 3.) Abastecimento de Carros 4.) Agendar Eventos 5.) Sair'));
-
-			if (escolha === 1) {
-				reservarQuarto();
-				inicio()
-			} else if (escolha === 2) {
-				cadastrarHospede()
-				inicio()
-			} else if (escolha === 3) {
-				abastecerCarro();
-			} else if (escolha === 4) {
-				agendarEvento();
-			} else if (escolha === 5) {
-				sair();
-			} else {
-				erro();
-			}
+			if (!login()) return;
+			let escolha;
+			do {
+				escolha = prompt("MENU PRINCIPAL\n1. Reservas de quartos\n2. Cadastro de hóspedes\n3. Eventos\n4. Ar-condicionado\n5. Abastecimento\n6. Relatórios operacionais\n7. Sair");
+				if (escolha === null) escolha = "7";
+				switch (escolha) {
+					case "1": reservarQuarto(); break;
+					case "2": cadastrarHospede(); break;
+					case "3": agendarEvento(); break;
+					case "4": compararArCondicionado(); break;
+					case "5": abastecerCarro(); break;
+					case "6": exibirRelatorios(); break;
+					case "7": alert(`Muito obrigado e até logo, ${hotel_sistem.usuario_atual.nome}.`); break;
+					default: alert("Opção inválida. Escolha um número de 1 a 7.");
+				}
+			} while (escolha !== "7");
 		}
-
-		function cadastro_hospedes() {
-			alert('HOTEL {NOME DO HOTEL} - CADASTRO DE HÓSPEDES');
-			inicio();
-		}
-
-		function abastecer_carros() {
-			alert('HOTEL {NOME DO HOTEL} - ABASTECER');
-			inicio();
-		}
-
-		function erro() {
-			alert('Por favor, informe um número entre 1 e 4');
-			inicio();
-		}
-
-		function sair() {
-			var confirma = confirm('Você deseja sair?');
-			if (confirma) {
-				window.close();
-			} else {
-				inicio();
-			}
-		}
-
-
 
 		inicio();
 	</script>
 </head>
-
-<body>
-
-</body>
-
+<body></body>
 </html>

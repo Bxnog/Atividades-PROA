@@ -60,5 +60,7 @@ export function reservarQuarto() {
         alert("Reserva concluida")
     }
     quarto_escolhido.livre = false
+    // Guarda os valores confirmados para o relatório operacional.
+    hotel_sistem.reservas.push({ hospede: nome_hospede, quarto: numero_quarto, dias, total });
     hotel_sistem.gerarMapaQuartos()
 }

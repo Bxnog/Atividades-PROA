@@ -29,18 +29,21 @@
             }
             descansar() {
                 this.cansaco -= 40;
-                if(this.cansaco < 0){
+                if (this.cansaco < 0) {
                     this.cansaco = 0;
                 }
-                if(this.cansaco != 0){console.log(`${this.nome} está descansando e se sentindo mais feliz.`);}
-                else if(this.cansaco == 0){console.log(`${this.nome} esta pronto para brincar!`);}
+                if (this.cansaco != 0) { console.log(`${this.nome} está descansando e se sentindo mais feliz.`); }
+                else if (this.cansaco == 0) { console.log(`${this.nome} esta pronto para brincar!`); }
             }
 
             verificarStatus() {
-                console.log(`Status atual de ${this.nome}:`);
-                console.log(`Nível de fome: ${this.nivelDeFome}`);
-                console.log(`Nível de felicidade: ${this.nivelFelicidade}`);
-                console.log(`Nível de Cansaço: ${this.cansaco}`);
+                alert(
+                    `Status atual de ${this.nome}:\n` +
+                    `Nível de fome: ${this.nivelDeFome}\n` +
+                    `Nível de felicidade: ${this.nivelFelicidade}\n` +
+                    `Nível de cansaço: ${this.cansaco}\n` +
+                    `Idade: ${this.idade}`
+                );
             }
 
             passarTempo() {
@@ -52,17 +55,17 @@
                 console.log(`${this.nome} está ficando mais faminto com o passar do tempo.`);
                 return true;
             }
-            derrota(){
+            derrota() {
 
-                if(this.nivelDeFome >= 100){
+                if (this.nivelDeFome >= 100) {
                     console.log(`${this.nome} morreu de fome :(`);
                     this.vivo = false;
                 }
-                if(this.nivelFelicidade <= 0){
+                if (this.nivelFelicidade <= 0) {
                     console.log(`${this.nome} morreu de Tristeza :(`);
                     this.vivo = false;
                 }
-                if(this.cansaco >= 100){
+                if (this.cansaco >= 100) {
                     console.log(`${this.nome} morreu de Cansaço! :(`);
                     this.vivo = false;
                 }
@@ -74,17 +77,26 @@
         // Programa Principal
         console.log("Bem-vindo ao Simulador de Animal de Estimação Virtual!");
         const nomePet = prompt("Digite o nome do seu animal de estimação:") || "Baltazar Guilherme Tenório";
-        const pet = and  = new BichinhoVirtual(nomePet);
+        const pet = new BichinhoVirtual(nomePet);
 
-        while (true) {
-            console.log("\nEscolha uma ação:");
-            console.log("1. Alimentar " + nomePet);
-            console.log("2. Brincar com " + nomePet);
-            console.log("3. Descansar " + nomePet);
-            console.log("4. Verificar o status de " + nomePet);
-            console.log("5. Sair");
+        while (pet.vivo) {
+            // alert(
+            //     `Escolha uma ação:\n` +
+            //     `1. Alimentar ${nomePet}\n` +
+            //     `2. Brincar com ${nomePet}\n` +
+            //     `3. Descansar ${nomePet}\n` +
+            //     `4. Verificar o status de ${nomePet}\n` +
+            //     `5. Sair`
+            // );
 
-            const escolha = parseInt(prompt("Escolha uma opção:"));
+            const escolha = Number(prompt(
+                `Escolha uma ação:\n` +
+                `1. Alimentar ${nomePet}\n` +
+                `2. Brincar com ${nomePet}\n` +
+                `3. Descansar ${nomePet}\n` +
+                `4. Verificar o status de ${nomePet}\n` +
+                `5. Sair`
+            ));
 
             switch (escolha) {
                 case 1:
@@ -101,13 +113,18 @@
                     break;
                 case 5:
                     console.log("Saindo do Simulador de Animal de Estimação Virtual. Adeus!");
-                    process.exit();
+                    break;
                 default:
                     console.log("Escolha inválida. Tente novamente.");
+                    continue;
             }
 
-            pet.passarTempo()// Simula o tempo que passa após cada ação
-            if(this.vivo == false){
+            if (escolha === 5) {
+                break;
+            }
+
+            pet.passarTempo(); // Simula o tempo que passa após cada ação
+            if (!pet.vivo) {
                 console.log("O jogo acabou!");
                 break;
             }

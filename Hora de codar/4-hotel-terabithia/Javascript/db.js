@@ -1,4 +1,4 @@
-export const hotel_sistem = {
+﻿export const hotel_sistem = {
     senha: "2678",
     usuarios: [],
     usuario_atual: { nome: "Breno" },
@@ -8,6 +8,8 @@ export const hotel_sistem = {
     // Quartos
     // ==============================================================================================
     quartos: Array.from({ length: 20 }, (_, index) => ({ numero: index + 1, livre: true, hospede: null })),
+    reservas: [],
+    eventos: [],
 
     gerarMapaQuartos() {
         let mapa = `======================================\n`;
@@ -203,21 +205,60 @@ export const hotel_sistem = {
                 melhorPosto = posto.Nome;
                 melhorOpcao = combustivelIdeal;
             }
-
         }
         alert(`Melhor opção: ${melhorOpcao} no posto ${melhorPosto} com custo de R$ ${menorPreco.toFixed(2)}`);
     },
-    // =============================================================================
-    // Eventos 
-    // =============================================================================
+    // ==============================================================================================
+    // Ar-condicionado
+    // ==============================================================================================
+    calcularOrcamentoAr(dados) {
+        const bruto = dados.valor * dados.quantidade;
+        const aplicarDesconto = dados.quantidade >= dados.minimo;
+        const total = bruto - (aplicarDesconto ? bruto * dados.desconto / 100 : 0) + dados.deslocamento;
+        return { ...dados, total };
+    },
+    // ==============================================================================================
+    // Eventos
+    // ==============================================================================================
     escolherSalao(nConvidados) {
-        let saloes = [{ id: 1, nome: "Laranja", capacidade: 220 }, { id: 2, nome: "Colorado", capacidade: 350 }]
-        for(let i = 0; i < saloes.length; i++){
-            if(saloes[i].capacidade < nConvidados){
-                continue
-            }
-            return [saloes[i].nome, saloes[i].capacidade - nConvidados]
-        }
+        if (nConvidados <= 220) return ["Laranja", Math.max(0, nConvidados - 150)];
+        if (nConvidados <= 350) return ["Colorado", 0];
+        return false;
+    },
+    agendarDia(dia) {
+        const dias = {
+            segunda: "segunda-feira",
+            terca: "terca-feira",
+            quarta: "quarta-feira",
+            quinta: "quinta-feira",
+            sexta: "sexta-feira",
+            sabado: "sábado",
+            domingo: "domingo"
+        };
+        // Devolve o nome do dia valido; a interface decide como pedir novamente em caso de erro.
+        return dias[dia] ?? false;
+    },
+    agendarHora(dia, horaInicio, horaFim) {
+        const fimDeSemana = dia === "sábado" || dia === "domingo";
+        const horaMaxima = fimDeSemana ? 15 : 23;
+
+        return Number.isInteger(horaInicio) && Number.isInteger(horaFim) &&
+            horaInicio >= 7 && horaInicio < horaFim && horaFim <= horaMaxima && horaFim - horaInicio <= 12;
+    },
+    calcularGarcons(nConvidados, duracao) {
+        return Math.ceil(nConvidados / 12) + Math.floor(duracao / 2);
+    },
+    calcularBuffet(nConvidados) {
+        const cafe = nConvidados * 0.2;
+        const agua = nConvidados * 0.5;
+        const salgados = nConvidados * 7;
+        const custo = cafe * 0.8 + agua * 0.4 + (salgados / 100) * 34;
+        return { cafe, agua, salgados, custo };
+    },
+    atribuirGarcom(nConvidados, horas){
+        let garcons = Math.ceil(nConvidados / 12)
+        garcons += Math.floor(horas / 2)
+        return garcons
     }
 
 };
