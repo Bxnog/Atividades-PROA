@@ -1,15 +1,16 @@
-import { FiBookmark, FiHeart, FiMessageCircle, FiMoreHorizontal, FiSend } from 'react-icons/fi'
+import { FiMoreHorizontal } from 'react-icons/fi';
 import { useState } from 'react';
 import Comments from './Comments';
+import PostActions from './PostActions';
 function Post({ post }) {
 
   const [likePost, setLikePost] = useState(false);
   const [showComments, setShowComments] = useState(false)
+  const [likes, setLikes] = useState(post.likes);
 
-
-
-  function darLike() {
-    post.likes += likePost ? -1 : 1
+  function toggleLike() {
+    setLikes((count) => count + (likePost ? -1 : 1));
+    setLikePost((liked) => !liked);
   }
   return (
     <>
@@ -17,6 +18,9 @@ function Post({ post }) {
         showComments && (
           <Comments
             post={post}
+            liked={likePost}
+            likes={likes}
+            onToggleLike={toggleLike}
             onClose={() => setShowComments(false)}
           />
         )
@@ -33,25 +37,12 @@ function Post({ post }) {
         </header>
         <img className="post__image" src={post.image} alt={post.alt} />
         <div className="post__content">
-          <div className="post__actions">
-            <button className="icon-button" type="button" aria-label="Curtir" onClick={
-              () => { setLikePost(!likePost); darLike() }
-            }>
-              <FiHeart style={{
-                fill: likePost ? "red" : "transparent",
-                color: likePost ? "red" : "currentColor"
-              }} />
-            </button>
-            <button className="icon-button" type="button" aria-label="Comentar" onClick={() => setShowComments(true)}>
-              <FiMessageCircle />
-            </button>
-            <button className="icon-button" type="button" aria-label="Enviar">
-              <FiSend /></button>
-            <button className="icon-button" type="button" aria-label="Salvar">
-              <FiBookmark />
-            </button>
-          </div>
-          <p className="post__likes"><strong>{post.likes} curtidas</strong></p>
+          <PostActions
+            liked={likePost}
+            onToggleLike={toggleLike}
+            onComment={() => setShowComments(true)}
+          />
+          <p className="post__likes"><strong>{likes} curtidas</strong></p>
           <p className="post__caption"><strong>{post.user}</strong>{post.caption}</p>
         </div>
       </article>

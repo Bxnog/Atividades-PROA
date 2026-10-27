@@ -1,0 +1,16 @@
+[
+  { "id": 1, "postId": 1, "user": "ana_doglover", "avatar": "/images/6.jpg", "text": "Que passeio gostoso, Thor!", "likes": 20, "createdAt": "2026-10-23T14:30:00" },
+  { "id": 2, "postId": 1, "user": "babi_patinhas", "avatar": "/images/5.jpg", "text": "A carinha de quem não quer voltar pra casa 😂", "likes": 8, "createdAt": "2026-10-23T14:31:00" },
+  { "id": 3, "postId": 2, "user": "thor_dog", "avatar": "/images/7.jpg", "text": "Esse sol foi feito pra gente mesmo!", "likes": 12, "createdAt": "2026-10-24T10:15:00" },
+  { "id": 4, "postId": 2, "user": "mel_dachshund", "avatar": "/images/4.jpg", "text": "Luna, vamos passear juntas? 🐾", "likes": 5, "createdAt": "2026-10-24T10:20:00" },
+  { "id": 5, "postId": 3, "user": "luna_a_poodle", "avatar": "/images/2.jpg", "text": "Descansar também faz parte do treino!", "likes": 7, "createdAt": "2026-10-24T12:05:00" },
+  { "id": 6, "postId": 3, "user": "fred_salsicha", "avatar": "/images/1.jpg", "text": "A bolinha sempre vence 😂", "likes": 3, "createdAt": "2026-10-24T12:10:00" },
+  { "id": 7, "postId": 4, "user": "nina_patinhas", "avatar": "/images/6.jpg", "text": "Mel, guarda um petisco pra mim!", "likes": 16, "createdAt": "2026-10-24T16:40:00" },
+  { "id": 8, "postId": 4, "user": "toto_aventureiro", "avatar": "/images/5.jpg", "text": "Essa fiscal merece aumento.", "likes": 4, "createdAt": "2026-10-24T16:43:00" },
+  { "id": 9, "postId": 5, "user": "bento_buldogue", "avatar": "/images/3.jpg", "text": "Explorar é a melhor parte do dia!", "likes": 10, "createdAt": "2026-10-25T09:02:00" },
+  { "id": 10, "postId": 5, "user": "ana_doglover", "avatar": "/images/6.jpg", "text": "Qual vai ser o próximo destino?", "likes": 2, "createdAt": "2026-10-25T09:10:00" },
+  { "id": 11, "postId": 6, "user": "thor_dog", "avatar": "/images/7.jpg", "text": "Passeio bom é passeio com tempo pra cheirar tudo!", "likes": 11, "createdAt": "2026-10-25T11:22:00" },
+  { "id": 12, "postId": 6, "user": "mel_dachshund", "avatar": "/images/4.jpg", "text": "Nina aproveitando muito 🐶", "likes": 6, "createdAt": "2026-10-25T11:25:00" },
+  { "id": 13, "postId": 7, "user": "toto_aventureiro", "avatar": "/images/5.jpg", "text": "Aceito pagamento em biscoitos também!", "likes": 9, "createdAt": "2026-10-25T18:30:00" },
+  { "id": 14, "postId": 7, "user": "babi_patinhas", "avatar": "/images/6.jpg", "text": "Fred nasceu pronto pra capa de revista.", "likes": 5, "createdAt": "2026-10-25T18:35:00" }
+]

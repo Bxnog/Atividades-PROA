@@ -1,12 +1,79 @@
-[   
+[
   {
     "id": 1,
-    "user": "Cachorro",
-    "location": "Sampa, Brasil",
-    "avatar": "/public/images/7.jpg",
-    "image": "/public/images/7.jpg",
-    "alt": "Xícara de café ao lado de um teclado",
+    "user": "thor_dog",
+    "location": "Parque Ibirapuera, SP",
+    "avatar": "/images/7.jpg",
+    "image": "/images/7.jpg",
+    "alt": "Cachorro posando para a foto no parque",
     "likes": 87,
-    "caption": "Matando falso gangster, comendo a comida do meu dono."
-  } 
+    "createdAt": "2026-10-23T13:20:00",
+    "caption": "Matando a saudade do meu passeio favorito 🐾"
+  },
+  {
+    "id": 2,
+    "user": "luna_a_poodle",
+    "location": "São Paulo, Brasil",
+    "avatar": "/images/2.jpg",
+    "image": "/images/2.jpg",
+    "alt": "Luna aproveitando um momento ao ar livre",
+    "likes": 142,
+    "createdAt": "2026-10-24T09:15:00",
+    "caption": "Sol no focinho e coração quentinho ☀️🐶"
+  },
+  {
+    "id": 3,
+    "user": "bento_buldogue",
+    "location": "Vila Madalena, SP",
+    "avatar": "/images/3.jpg",
+    "image": "/images/3.jpg",
+    "alt": "Bento descansando depois de brincar",
+    "likes": 63,
+    "createdAt": "2026-10-24T11:40:00",
+    "caption": "Pausa estratégica depois de correr atrás da bolinha."
+  },
+  {
+    "id": 4,
+    "user": "mel_dachshund",
+    "location": "Campinas, SP",
+    "avatar": "/images/4.jpg",
+    "image": "/images/4.jpg",
+    "alt": "Mel curiosa olhando para a câmera",
+    "likes": 208,
+    "createdAt": "2026-10-24T16:10:00",
+    "caption": "Fiscal oficial de todos os petiscos da casa 👀"
+  },
+  {
+    "id": 5,
+    "user": "toto_aventureiro",
+    "location": "Trilha do parque",
+    "avatar": "/images/5.jpg",
+    "image": "/images/5.jpg",
+    "alt": "Totó explorando um lugar novo",
+    "likes": 95,
+    "createdAt": "2026-10-25T08:35:00",
+    "caption": "Cada passeio é uma nova aventura!"
+  },
+  {
+    "id": 6,
+    "user": "nina_patinhas",
+    "location": "Santos, SP",
+    "avatar": "/images/6.jpg",
+    "image": "/images/6.jpg",
+    "alt": "Nina curtindo o passeio de hoje",
+    "likes": 176,
+    "createdAt": "2026-10-25T11:00:00",
+    "caption": "Dia bom é dia com passeio e muitas cheiradinhas."
+  },
+  {
+    "id": 7,
+    "user": "fred_salsicha",
+    "location": "São Paulo, Brasil",
+    "avatar": "/images/1.jpg",
+    "image": "/images/1.jpg",
+    "alt": "Fred posando para mais uma foto",
+    "likes": 54,
+    "createdAt": "2026-10-25T18:10:00",
+    "caption": "Modelo profissional, pagamento em petiscos 📸"
+  }
 ]
